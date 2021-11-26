@@ -1,0 +1,71 @@
+@import "../../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 450px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        idTabla: (
+            width: 10rem,
+        ),
+        numOrden: (
+            width: 6rem,
+        ),
+        codigo: (
+            width: 8rem,
+        ),
+        nombre: (
+            width: 20rem,
+        ),
+        descripcion: (
+            width: 20rem,
+        ),
+        opt: (
+            width: 2.5rem,
+        ),
+    )
+);
+
+::ng-deep mat-dialog-container {
+    padding-bottom: 8px !important;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding-bottom: 5px !important;
+}
+
+.image {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    p {
+        text-align: left;
+        margin-bottom: 0px;
+    }
+    img {
+        height: 50px !important;
+        width: 50px !important;
+    }
+}
+
+// ANCHOS MINIMOS //
+::ng-deep .mat-horizontal-stepper-header-container {
+    margin-top: -20px !important;
+    margin-bottom: -12px !important;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding: 0 24px 2px 24px !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+    pointer-events: none !important;
+}

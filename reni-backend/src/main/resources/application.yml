@@ -1,0 +1,87 @@
+spring:
+  profiles:
+    active: '@spring.profiles.active@'
+  devtools:
+    livereload:
+      port: 35730
+security:
+    oauth2:
+      resource:
+        jwt:
+          key-value: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA74dddBgzojGAODlMGx0mWXIpusTHcY5n3Y7xrPAVdgNsl9CTiZTpxtPHXmOtV+5Kx58q7P+2PsrFZUoGAr4aFzeGIdnE1A2ZtZTknvY4VEvFkWOQyQfm3nIPCQtv6EZv6AFinQyicr7jjapbgb4JjldN+cABbb3eh6lvJP/twwAlrCiuVKfw36Ms9SP3j6duAoI7AaDFY247UYh7ngoGJFV6xkaRzgiBW9OlUpwETCFiZwYtGvPNngHTEWjV2IL1QyZdv+aKbloi+HsvLYRNrhzRaG/3A19NXBntGtdKLqH5PClj7g1YyTaQVyujVREU8zWzXcmmnzJ29RshDRrsXQIDAQAB-----END PUBLIC KEY-----
+swagger:
+  api:
+    title: "Spring Boot REST API"
+    description: "Clientes REST API"
+    license: "Apache 2.0"
+    termsOfServiceUrl: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    version: 1.0.0
+    controller:
+      basepackage: pe.gob.mimp.reni
+    contact:
+      nombres : "Nerio Baez"
+      web : "http://besoft-ti.blogspot.com"
+      email: "nbaez001@gmail.com"
+plantillas:
+  excel:
+    centroAtencion: "plantillas/pl_centro_atencion.xlsx"
+    maestra: "plantillas/pl_maestra.xlsx"
+    parametroEstructura: "plantillas/pl_parametroEstructura.xlsx" 
+---
+server:
+  port: 8081
+  servlet:
+    context-path: /reni-backend
+spring:
+  profiles: dev
+  application:
+    name: reni-backend
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    jdbc-url: "jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+    username: "RENI"
+    password: "1234"    hikari:      maximum-pool-size: 5      connection-timeout: 60000
+  datasource-general:
+    driver-class-name: oracle.jdbc.OracleDriver
+    jdbc-url: "jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+    username: "GENERAL"
+    password: "1234"
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 60000
+  datasource-seguridad:
+    driver-class-name: oracle.jdbc.OracleDriver
+    jdbc-url: "jdbc:oracle:thin:@127.0.0.1:1521:orcl"
+    username: "SEGURIDAD"
+    password: "1234"
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 60000
+---
+spring:
+  profiles: qa
+  application:
+    name: reni-backend
+  datasource:
+    jndi-name: jdbc/ReniDS
+    driver-class-name: oracle.jdbc.OracleDriver
+  datasource-general:
+    jndi-name: jdbc/GeneralDS
+    driver-class-name: oracle.jdbc.OracleDriver
+  datasource-seguridad:
+    jndi-name: jdbc/ReniSeguridadDS
+    driver-class-name: oracle.jdbc.OracleDriver
+---
+spring:
+  profiles: prd
+  application:
+    name: reni-backend
+  datasource:
+    jndi-name: jdbc/ReniDS
+    driver-class-name: oracle.jdbc.OracleDriver
+  datasource-general:
+    jndi-name: jdbc/GeneralDS
+    driver-class-name: oracle.jdbc.OracleDriver
+  datasource-seguridad:
+    jndi-name: jdbc/ReniSeguridadDS
+    driver-class-name: oracle.jdbc.OracleDriver

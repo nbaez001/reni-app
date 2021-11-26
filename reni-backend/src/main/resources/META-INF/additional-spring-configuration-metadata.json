@@ -1,0 +1,59 @@
+{
+	"properties": [
+		{
+			"name": "swagger.api.title",
+			"type": "java.lang.String",
+			"description": "A description for 'swagger.api.title'"
+		},
+		{
+			"name": "swagger.api.description",
+			"type": "java.lang.String",
+			"description": "A description for 'swagger.api.description'"
+		},
+		{
+			"name": "swagger.api.license",
+			"type": "java.lang.String",
+			"description": "A description for 'swagger.api.license'"
+		},
+		{
+			"name": "swagger.api.termsOfServiceUrl",
+			"type": "java.lang.String",
+			"description": "A description for 'swagger.api.termsOfServiceUrl'"
+		},
+		{
+			"name": "swagger.api.version",
+			"type": "java.lang.String",
+			"description": "A description for 'swagger.api.version'"
+		},
+		{
+			"name": "swagger.api.controller.basepackage",
+			"type": "java.lang.String",
+			"description": "A description for 'swagger.api.controller.basepackage'"
+		},
+		{
+			"name": "swagger.api.contact.nombres",
+			"type": "java.lang.String",
+			"description": "A description for 'swagger.api.contact.nombres'"
+		},
+		{
+			"name": "swagger.api.contact.web",
+			"type": "java.lang.String",
+			"description": "A description for 'swagger.api.contact.web'"
+		},
+		{
+			"name": "swagger.api.contact.email",
+			"type": "java.lang.String",
+			"description": "A description for 'swagger.api.contact.email'"
+		},
+		{
+			"name": "plantillas.excel.centro-atencion",
+			"type": "java.lang.String",
+			"description": "A description for 'plantilla.excel.centro-atencion'"
+		},
+		{
+			"name": "plantillas.excel.maestra",
+			"type": "java.lang.String",
+			"description": "A description for 'plantilla.excel.maestra'"
+		}
+	]
+}

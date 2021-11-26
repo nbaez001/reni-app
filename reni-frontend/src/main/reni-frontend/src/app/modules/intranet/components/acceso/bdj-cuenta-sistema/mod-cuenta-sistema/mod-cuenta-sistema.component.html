@@ -1,0 +1,191 @@
+<mat-toolbar class="mat-accent mat-dialog-header">
+    <span>{{dataDialog.titulo}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <h4>Datos personales</h4>
+    <mat-grid-list cols="12" rowHeight="56px">
+        <form [formGroup]="formularioGrp">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Tipo documento</mat-label>
+                    <input matInput formControlName="tipoDocumento" placeholder="Tipo documento" type="text" readonly>
+                    <mat-error *ngIf="formErrors.tipoDocumento">{{formErrors.tipoDocumento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Numero documento</mat-label>
+                    <input matInput formControlName="nroDocumento" placeholder="Numero documento" type="number"
+                        readonly>
+                    <mat-error *ngIf="formErrors.nroDocumento">{{formErrors.nroDocumento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </form>
+        <form [formGroup]="formularioDetGrp">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Nombres</mat-label>
+                    <input matInput formControlName="nombres" placeholder="Nombres" type="text" [Uppercased]
+                        cdkFocusInitial>
+                    <mat-error *ngIf="formDetErrors.nombres">{{formDetErrors.nombres}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Apellido paterno</mat-label>
+                    <input matInput formControlName="apePaterno" placeholder="Apellido paterno" type="text"
+                        [Uppercased]>
+                    <mat-error *ngIf="formDetErrors.apePaterno">{{formDetErrors.apePaterno}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Apellido materno</mat-label>
+                    <input matInput formControlName="apeMaterno" placeholder="Apellido materno" type="text"
+                        [Uppercased]>
+                    <mat-error *ngIf="formDetErrors.apeMaterno">{{formDetErrors.apeMaterno}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Fecha nacimiento</mat-label>
+                    <input matInput formControlName="fecNacimiento" [matDatepicker]="picker"
+                        placeholder="Fecha nacimiento">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="formDetErrors.fecNacimiento">{{formDetErrors.fecNacimiento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Sexo</mat-label>
+                    <mat-select formControlName="sexo">
+                        <mat-option *ngIf="!listaSexo" disabled>
+                            <div class="select-spinner">
+                                <span>Cargando...</span>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                        </mat-option>
+                        <mat-option *ngIf="listaSexo" value="">
+                            Seleccione
+                        </mat-option>
+                        <mat-option *ngFor="let sexo of listaSexo" [value]="sexo">
+                            {{sexo.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formDetErrors.sexo">{{formDetErrors.sexo}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Area</mat-label>
+                    <input matInput formControlName="area" placeholder="Area" type="text" [Uppercased] readonly>
+                    <button mat-icon-button matTooltip="Buscar Areas" type="button" class="btn-icon-input"
+                        color="primary" (click)="buscarAreasSeguridad()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error *ngIf="formDetErrors.area">{{formDetErrors.area}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Cargo</mat-label>
+                    <mat-select formControlName="cargo">
+                        <mat-option *ngIf="!listaCargo" disabled>
+                            <div class="select-spinner">
+                                <span>Cargando...</span>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                        </mat-option>
+                        <mat-option *ngIf="listaCargo" value="">
+                            Seleccione
+                        </mat-option>
+                        <mat-option *ngFor="let cargo of listaCargo" [value]="cargo">
+                            {{cargo.descripcion}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formDetErrors.cargo">{{formDetErrors.cargo}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </form>
+    </mat-grid-list>
+    <h4>Datos de cuenta</h4>
+    <form [formGroup]="formularioUsuGrp">
+        <mat-grid-list cols="12" rowHeight="56px">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Usuario</mat-label>
+                    <input matInput formControlName="usuario" placeholder="Usuario" type="text">
+                    <mat-error *ngIf="formUsuErrors.usuario">{{formUsuErrors.usuario}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput formControlName="contrasenia" placeholder="Contraseña" type="password">
+                    <mat-error *ngIf="formUsuErrors.contrasenia">{{formUsuErrors.contrasenia}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Confirmar contraseña</mat-label>
+                    <input matInput formControlName="confContrasenia" placeholder="Confirmar Contraseña"
+                        type="password">
+                    <mat-error *ngIf="formUsuErrors.confContrasenia">{{formUsuErrors.confContrasenia}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Perfil</mat-label>
+                    <mat-select formControlName="perfil">
+                        <mat-option *ngIf="!listaPerfil" disabled>
+                            <div class="select-spinner">
+                                <span>Cargando...</span>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                        </mat-option>
+                        <mat-option *ngIf="listaPerfil" value="">
+                            Seleccione
+                        </mat-option>
+                        <mat-option *ngFor="let perfil of listaPerfil" [value]="perfil">
+                            {{perfil.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formUsuErrors.perfil">{{formUsuErrors.perfil}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 12, md: 8, lg: 8, xl: 8}">
+                <mat-form-field appearance="legacy">
+                    <mat-label>Servicios</mat-label>
+                    <mat-select formControlName="servicio" multiple>
+                        <mat-option *ngIf="!listaServicios" disabled>
+                            <div class="select-spinner">
+                                <span>Cargando...</span>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                        </mat-option>
+                        <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">TODOS</mat-option>
+                        <mat-option *ngFor="let servicio of listaServicios" [value]="servicio" (click)="togglePerOne()">
+                            {{servicio.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formUsuErrors.servicio">{{formUsuErrors.servicio}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 12, md: 8, lg: 8, xl: 8}">
+                <mat-checkbox formControlName="flgReporteDisociado" color="primary">¿Asignar reportes anonimo?
+                </mat-checkbox>
+                <mat-error *ngIf="formUsuErrors.flgReporteDisociado">{{formUsuErrors.flgReporteDisociado}}
+                </mat-error>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-raised-button color="accent" type="button" (click)="modCuentaSistema()" [class.spinner]="modif"
+        [disabled]="modif">Guardar</button>
+    <button mat-raised-button [mat-dialog-close]="">Salir</button>
+</div>

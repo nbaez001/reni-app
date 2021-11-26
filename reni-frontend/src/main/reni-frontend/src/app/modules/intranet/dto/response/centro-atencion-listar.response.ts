@@ -1,0 +1,33 @@
+export class CentroAtencionListarResponse {
+    idCentroAtencion: number;
+    idtTipoCentro: string;
+    nomTipoCentro: string;
+    idtSubtipoCentro: string;
+    nomSubtipoCentro: string;
+    codigo: string;
+    nombre: string;
+    fechaCreacion: Date;
+    ubigeo: string;
+    nomDepartamento: string;
+    nomProvincia: string;
+    nomDistrito: string;
+    direccion: string;
+    refDireccion: string;
+    areaResid: string;
+    flgTieneTelef: number;
+    flgTieneLuz: number;
+    flgTieneAgua: number;
+    flgTieneDesague: number;
+    capacidadMaxima: number;
+    idTipDocRepres: number;
+    nomTipDocRepres: string;
+    nroDocRepres: string;
+    nombreRepres: string;
+    apePaternoRepres: string;
+    apeMaternoRepres: string;
+    nroTelefono: string;
+    tipoCoordenada: string;
+    coordenadaX: string;
+    coordenadaY: string;
+    flgActivo: number;
+}

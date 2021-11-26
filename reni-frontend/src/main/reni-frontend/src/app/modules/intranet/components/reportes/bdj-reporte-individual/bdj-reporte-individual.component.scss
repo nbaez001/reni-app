@@ -1,0 +1,133 @@
+.table-container {
+    max-height: 400px;
+}
+
+.table-container {
+    overflow: auto;
+    // .mat-column-select {
+    //     overflow: initial;
+    // }
+    .empty {
+        padding: 20px;
+        text-align: center;
+        position: sticky;
+        bottom: 0px;
+        left: 0px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    .mat-paginator-sticky {
+        bottom: 0px !important;
+        left: 0px !important;
+        position: sticky !important;
+        z-index: 10 !important;
+    }
+}
+
+.spinerTable {
+    padding-top: 5px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: sticky;
+}
+
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+    padding-left: 10px;
+}
+
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type,
+th.mat-header-cell:last-of-type {
+    padding-right: 0px;
+}
+
+// CHECKBOX
+mat-checkbox {
+    margin-left: 10px;
+}
+//FIN CHECKBOX
+
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+th,
+td {
+    overflow: hidden;
+    width: 180px;
+    text-overflow: ellipsis;
+}
+
+th.mat-column-id,
+td.mat-column-id {
+    overflow: hidden;
+    width: 50px;
+    text-overflow: ellipsis;
+}
+
+th.mat-column-NOM_LIN_INT,
+td.mat-column-NOM_LIN_INT {
+    overflow: hidden;
+    width: 150px;
+    text-overflow: ellipsis;
+}
+
+th.mat-column-NOM_SER,
+td.mat-column-NOM_SER {
+    overflow: hidden;
+    width: 200px;
+    text-overflow: ellipsis;
+}
+
+th.mat-column-NOM_ENT,
+td.mat-column-NOM_ENT {
+    overflow: hidden;
+    width: 220px;
+    text-overflow: ellipsis;
+}
+
+th.mat-column-COD_USU,
+td.mat-column-COD_USU {
+    overflow: hidden;
+    width: 160px;
+    text-overflow: ellipsis;
+}
+
+th.mat-column-COD_DISOC,
+td.mat-column-COD_DISOC {
+    overflow: hidden;
+    width: 160px;
+    text-overflow: ellipsis;
+}
+
+th.mat-column-NOM_CEN,
+td.mat-column-NOM_CEN {
+    overflow: hidden;
+    width: 200px;
+    text-overflow: ellipsis;
+}
+
+// CHECKBOX MULTILINE
+::ng-deep.mat-checkbox-layout {
+    white-space: normal !important;
+}
+
+::ng-deep.mat-checkbox-inner-container {
+    margin-top: 4px;
+}
+
+::ng-deep.mat-checkbox-inner-container {
+    margin-top: 15px !important;
+}
+
+// FIN CHECKBOX MULTILINE
+
+// CHECKBOX TEXTO PEGADO
+::ng-deep .mat-checkbox-layout .mat-checkbox-label {
+    line-height: 14px !important;
+}
+// FIN CHECKBOX TEXTO PEGADO

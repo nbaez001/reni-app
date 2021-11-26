@@ -1,0 +1,41 @@
+<div class="page">
+    <mat-card class="login-card">
+        <mat-card-header>
+            <mat-card-title>
+                <h4>
+                    REGISTRO NOMINAL INTEGRADO DE LAS INTERVENCIONES DEL MIMP
+                </h4>
+                <img class="img-responsive" src="./assets/images/icons/logo.png">
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <h3>Ingresa a tu cuenta</h3>
+            <form [formGroup]="formularioGrp" *ngIf="formErrors" (keyup.enter)="autenticar()">
+                <mat-grid-list cols="12" rowHeight="56px">
+                    <mat-grid-tile [ResponsiveRows]="{xs:12, sm:12, md:12, lg:12, xl:12}">
+                        <mat-form-field>
+                            <input matInput formControlName="usuario" type="text" id="usuario"
+                                placeholder="Inserte su ID de usuario">
+                            <mat-error *ngIf="formErrors.usuario">{{formErrors.usuario}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs:12, sm:12, md:12, lg:12, xl:12}">
+                        <mat-form-field>
+                            <input matInput formControlName="contrasenia" type="password" id="contrasenia"
+                                placeholder="Inserte su contraseña">
+                            <mat-error *ngIf="formErrors.contrasenia">{{formErrors.contrasenia}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs:12, sm:12, md:12, lg:12, xl:12}">
+                        <mat-checkbox formControlName="recordar" color="primary">Recordar</mat-checkbox>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs:12, sm:12, md:12, lg:12, xl:12}">
+                        <button [class.spinner]="ingresar" [disabled]="ingresar" mat-raised-button color="accent"
+                            (click)="autenticar()">Ingresar</button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <span class="login-error" *ngIf="showMessage">{{errorMessage}}</span>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>

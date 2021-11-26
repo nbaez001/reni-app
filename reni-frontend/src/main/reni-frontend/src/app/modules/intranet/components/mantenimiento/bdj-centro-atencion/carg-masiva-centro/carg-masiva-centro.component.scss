@@ -1,0 +1,146 @@
+@import "../../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 450px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        servicios: (
+            width: 12rem,
+        ),
+        codigo: (
+            width: 5rem,
+        ),
+        nombre: (
+            width: 15rem,
+        ),
+        idtTipoCentro: (
+            width: 4rem,
+        ),
+        nomTipoCentro: (
+            width: 15rem,
+        ),
+        idtSubtipoCentro: (
+            width: 4rem,
+        ),
+        nomSubtipoCentro: (
+            width: 15rem,
+        ),
+        flgActivo: (
+            width: 4rem,
+        ),
+        fechaCreacion: (
+            width: 5rem,
+        ),
+        ubigeo: (
+            width: 5rem,
+        ),
+        departamento: (
+            width: 12rem,
+        ),
+        provincia: (
+            width: 12rem,
+        ),
+        distrito: (
+            width: 12rem,
+        ),
+        direccion: (
+            width: 20rem,
+        ),
+        refDireccion: (
+            width: 20rem,
+        ),
+        areaResid: (
+            width: 20rem,
+        ),
+        flgTieneTelef: (
+            width: 4rem,
+        ),
+        flgTieneLuz: (
+            width: 4rem,
+        ),
+        flgTieneAgua: (
+            width: 4rem,
+        ),
+        flgTieneDesague: (
+            width: 4rem,
+        ),
+        capacidadMaxima: (
+            width: 4rem,
+        ),
+        idTipDocRepres: (
+            width: 6rem,
+        ),
+        nroDocRepres: (
+            width: 6rem,
+        ),
+        nombreRepres: (
+            width: 8rem,
+        ),
+        apePaternoRepres: (
+            width: 8rem,
+        ),
+        apeMaternoRepres: (
+            width: 8rem,
+        ),
+        nroTelefono: (
+            width: 6rem,
+        ),
+        tipoCoordenada: (
+            width: 8rem,
+        ),
+        coordenadaX: (
+            width: 7rem,
+        ),
+        coordenadaY: (
+            width: 7rem,
+        ),
+        opt: (
+            width: 2.5rem,
+        ),
+    )
+);
+
+::ng-deep mat-dialog-container {
+    padding-bottom: 8px !important;
+}
+
+.ta-center {
+    text-align: center;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding-bottom: 5px !important;
+}
+
+.image {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+    p {
+        text-align: left;
+        margin-bottom: 0px;
+    }
+    img {
+        height: 50px !important;
+        width: 50px !important;
+    }
+}
+
+// ANCHOS MINIMOS //
+::ng-deep .mat-horizontal-stepper-header-container {
+    margin-top: -20px !important;
+    margin-bottom: -12px !important;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding: 0 24px 2px 24px !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+    pointer-events: none !important;
+}

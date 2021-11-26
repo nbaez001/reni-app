@@ -1,0 +1,39 @@
+<mat-toolbar class="mat-accent mat-dialog-header">
+    <span>{{dataDialog.titulo}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <form [formGroup]="formularioGrp" (keyup.enter)="regMaestra()">
+        <mat-grid-list cols="12" rowHeight="56px">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" placeholder="Nombre" type="text" [Uppercased]
+                        cdkFocusInitial>
+                    <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                <mat-form-field>
+                    <mat-label>Descripcion</mat-label>
+                    <input matInput formControlName="descripcion" placeholder="Descripcion" type="text" [Uppercased]>
+                    <mat-error *ngIf="formErrors.descripcion">{{formErrors.descripcion}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                <mat-form-field>
+                    <mat-label>ID Tabla</mat-label>
+                    <input matInput formControlName="idTabla" placeholder="ID Tabla" type="text" [Uppercased]>
+                    <mat-error *ngIf="formErrors.idTabla">{{formErrors.idTabla}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-raised-button color="accent" type="button" (click)="regMaestra()" [class.spinner]="guardar"
+        [disabled]="guardar">Guardar</button>
+    <button mat-raised-button [mat-dialog-close]="">Salir</button>
+</div>

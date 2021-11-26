@@ -1,0 +1,16 @@
+<mat-toolbar class="mat-accent mat-dialog-header">
+    <span>{{dataDialog.titulo}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <div class="confirmacion">
+        <ul style="text-align: left;">
+            <li *ngFor="let error of dataDialog.objeto">{{error.descripcion}}</li>
+        </ul>
+    </div>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-raised-button color="accent" type="button" [mat-dialog-close]="1">Aceptar</button>
+</div>

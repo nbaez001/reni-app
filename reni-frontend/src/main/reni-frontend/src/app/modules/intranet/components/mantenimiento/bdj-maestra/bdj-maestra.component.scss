@@ -1,0 +1,28 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        nombre: (
+            width: 12rem,
+        ),
+        descripcion: (
+            width: 18rem,
+        ),
+        idTabla: (
+            width: 8rem,
+        ),
+        flgActivo: (
+            width: 6rem,
+        ),
+        opt: (
+            width: 7.5rem,
+        ),
+    )
+);

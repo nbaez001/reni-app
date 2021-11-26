@@ -1,0 +1,32 @@
+{"properties": [
+  {
+    "name": "constantes.id-modulo-reni",
+    "type": "java.lang.String",
+    "description": "A description for 'constantes.id-modulo-reni'"
+  },
+  {
+    "name": "config.oauth2.private-key",
+    "type": "java.lang.String",
+    "description": "A description for 'config.oauth2.private-key'"
+  },
+  {
+    "name": "config.oauth2.publicKey",
+    "type": "java.lang.String",
+    "description": "A description for 'config.oauth2.publicKey'"
+  },
+  {
+    "name": "config.oauth2.clientId",
+    "type": "java.lang.String",
+    "description": "A description for 'config.oauth2.clientId'"
+  },
+  {
+    "name": "config.oauth2.clientSecret",
+    "type": "java.lang.String",
+    "description": "A description for 'config.oauth2.clientSecret'"
+  },
+  {
+    "name": "config.oauth2.expiration",
+    "type": "java.lang.String",
+    "description": "A description for 'config.oauth2.expiration'"
+  }
+]}

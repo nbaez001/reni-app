@@ -1,0 +1,51 @@
+<mat-toolbar class="mat-accent mat-dialog-header">
+    <span>{{dataDialog.titulo}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+        <mat-grid-list cols="12" rowHeight="56px">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                <mat-form-field>
+                    <mat-label>Nombre entidad</mat-label>
+                    <input matInput formControlName="nombre" placeholder="Nombre entidad" type="text" [Uppercased]
+                        (focusout)="generarSiglas()" cdkFocusInitial>
+                    <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                <mat-form-field>
+                    <mat-label>Siglas</mat-label>
+                    <input matInput formControlName="siglas" placeholder="Siglas" type="text" [Uppercased]>
+                    <mat-error *ngIf="formErrors.siglas">{{formErrors.siglas}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                <mat-form-field>
+                    <mat-label>Codigo entidad</mat-label>
+                    <input matInput formControlName="codigo" placeholder="Codigo entidad" type="text" [Uppercased]>
+                    <mat-error *ngIf="formErrors.codigo">{{formErrors.codigo}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                <mat-form-field>
+                    <mat-label>Codigo entidad BD Seguridad</mat-label>
+                    <input matInput formControlName="idAreaSeguridad" placeholder="Codigo entidad BD Seguridad"
+                        type="text" [Uppercased]>
+                    <button mat-icon-button matTooltip="Buscar entidades en BD Seguridad" type="button"
+                        class="btn-icon-input" color="primary" (click)="buscarEntidadesSeguridad()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error *ngIf="formErrors.idAreaSeguridad">{{formErrors.idAreaSeguridad}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-raised-button color="accent" type="button" (click)="modEntidad()" [class.spinner]="modif"
+        [disabled]="modif">Guardar</button>
+    <button mat-raised-button [mat-dialog-close]="">Salir</button>
+</div>

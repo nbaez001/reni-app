@@ -1,0 +1,90 @@
+.table-container {
+    max-height: 400px;
+}
+
+.table-container {
+    overflow: auto;
+    .empty {
+        padding: 20px;
+        text-align: center;
+        position: sticky;
+        bottom: 0px;
+        left: 0px;
+        font-size: 0.8em;
+        font-weight: bold;
+    }
+    .mat-paginator-sticky {
+        bottom: 0px !important;
+        left: 0px !important;
+        position: sticky !important;
+        z-index: 10 !important;
+    }
+}
+
+.spinerTable {
+    padding-top: 5px;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: sticky;
+}
+
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type,
+th.mat-header-cell:first-of-type {
+    padding-left: 10px;
+}
+
+td.mat-cell:last-of-type,
+td.mat-footer-cell:last-of-type,
+th.mat-header-cell:last-of-type {
+    padding-right: 0px;
+}
+
+.ta-center {
+    text-align: center;
+    button {
+        margin-right: 10px;
+    }
+}
+
+::ng-deep .mat-horizontal-stepper-header-container {
+    margin-top: -20px !important;
+    margin-bottom: -12px !important;
+}
+
+::ng-deep .mat-horizontal-content-container {
+    padding: 0 24px 2px 24px !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+    pointer-events: none !important;
+}
+
+// ESTILOS DE TABLA
+table {
+    width: 100%;
+    table-layout: fixed;
+}
+
+th,
+td {
+    overflow: hidden;
+    width: 130px;
+    text-overflow: ellipsis;
+}
+
+th.mat-column-id,
+td.mat-column-id {
+    overflow: hidden;
+    width: 60px;
+    text-overflow: ellipsis;
+}
+
+th.mat-column-COD_USU,
+td.mat-column-COD_USU {
+    overflow: hidden;
+    width: 160px;
+    text-overflow: ellipsis;
+}
+// FIN ESTILOS TABLA

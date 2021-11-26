@@ -1,0 +1,40 @@
+.login-card {
+    margin: 10% auto 0%;
+    width: 300px;
+    max-width: 300px;
+    text-align: center;
+    box-shadow: 0px 0px 10px 2px #888888;
+    mat-card-header {
+        display: flex !important;
+        justify-content: center !important;
+        mat-card-title {
+            h4 {
+                margin-top: 4px;
+                margin-bottom: 4px;
+            }
+        }
+    }
+    form {
+        mat-grid-tile {
+            button {
+                width: 90%;
+            }
+        }
+    }
+}
+
+// ::ng-deep .login-card-header-image {
+//     background-image: url("../../../../../assets/images/icons/logo.png");
+//     background-size: cover;
+//     height: 40px !important;
+//     width: auto !important;
+// }
+
+mat-checkbox {
+    padding-left: 10px;
+}
+
+.login-error {
+    color: red;
+    font-weight: bold;
+}

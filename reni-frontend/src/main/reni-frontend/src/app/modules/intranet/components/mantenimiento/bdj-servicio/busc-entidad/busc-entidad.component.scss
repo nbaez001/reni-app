@@ -1,0 +1,26 @@
+@import "../../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        codigo: (
+            width: 6rem,
+        ),
+        nombre: (
+            width: 20rem,
+        ),
+        siglas: (
+            width: 6rem,
+        ),
+    )
+);
+
+.mat-row:hover {
+    cursor: pointer;
+}

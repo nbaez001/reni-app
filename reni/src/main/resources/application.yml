@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: '@spring.profiles.active@'
+---
+server:
+  port: 8080
+  servlet:
+    context-path: /reni
+spring:
+  profiles: dev
+  application:
+    name: reni
+---
+spring:
+  profiles: qa
+  application:
+    name: reni
+---
+spring:
+  profiles: prd
+  application:
+    name: reni

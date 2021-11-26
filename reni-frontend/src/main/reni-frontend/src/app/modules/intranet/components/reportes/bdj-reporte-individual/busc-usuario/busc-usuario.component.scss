@@ -1,0 +1,44 @@
+@import "../../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        codUsuario: (
+            width: 10rem,
+        ),
+        codDisociacion:(
+            width: 10rem,
+        ),
+        tipDocumento: (
+            width: 6rem,
+        ),
+        nroDocumento: (
+            width: 6rem,
+        ),
+        nombre: (
+            width: 6rem,
+        ),
+        apePaterno: (
+            width: 6rem,
+        ),
+        apeMaterno: (
+            width: 6rem,
+        ),
+        sexo: (
+            width: 6rem,
+        ),
+        fecNacimiento: (
+            width: 6rem,
+        )
+    )
+);
+
+.mat-row:hover {
+    cursor: pointer;
+}

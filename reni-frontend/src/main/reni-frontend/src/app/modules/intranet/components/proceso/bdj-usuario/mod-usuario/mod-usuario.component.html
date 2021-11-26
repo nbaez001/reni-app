@@ -1,0 +1,116 @@
+<mat-toolbar class="mat-accent mat-dialog-header">
+    <span>{{dataDialog.titulo}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+        <mat-grid-list cols="12" rowHeight="56px">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Tiene documento</mat-label>
+                    <mat-select formControlName="tieneDocumento" (selectionChange)="evaluarDocumento()">
+                        <mat-option *ngIf="!listaTieneDocumento" disabled>
+                            <div class="select-spinner">
+                                <span>Cargando...</span>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                        </mat-option>
+                        <mat-option *ngIf="listaTieneDocumento" value="">
+                            SELECCIONE
+                        </mat-option>
+                        <mat-option *ngFor="let tieneDocumento of listaTieneDocumento" [value]="tieneDocumento">
+                            {{tieneDocumento.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formErrors.tieneDocumento">{{formErrors.tieneDocumento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Tipo documento</mat-label>
+                    <mat-select formControlName="tipoDocumento">
+                        <mat-option *ngIf="!listaTipoDocumento" disabled>
+                            <div class="select-spinner">
+                                <span>Cargando...</span>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                        </mat-option>
+                        <mat-option *ngIf="listaTipoDocumento" value="">
+                            SELECCIONE
+                        </mat-option>
+                        <mat-option *ngFor="let tipoDocumento of listaTipoDocumento" [value]="tipoDocumento">
+                            {{tipoDocumento.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formErrors.tipoDocumento">{{formErrors.tipoDocumento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Nro documento</mat-label>
+                    <input matInput formControlName="nroDocumento" placeholder="Nro documento" type="text" [Uppercased]>
+                    <mat-error *ngIf="formErrors.nroDocumento">{{formErrors.nroDocumento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" placeholder="Nombre" type="text" [Uppercased]>
+                    <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Apellido paterno</mat-label>
+                    <input matInput formControlName="apePaterno" placeholder="Apellido paterno" type="text"
+                        [Uppercased]>
+                    <mat-error *ngIf="formErrors.apePaterno">{{formErrors.apePaterno}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Apellido materno</mat-label>
+                    <input matInput formControlName="apeMaterno" placeholder="Apellido materno" type="text"
+                        [Uppercased]>
+                    <mat-error *ngIf="formErrors.apeMaterno">{{formErrors.apeMaterno}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Sexo</mat-label>
+                    <mat-select formControlName="sexo">
+                        <mat-option *ngIf="!listaSexo" disabled>
+                            <div class="select-spinner">
+                                <span>Cargando...</span>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                        </mat-option>
+                        <mat-option *ngIf="listaSexo" value="">
+                            SELECCIONE
+                        </mat-option>
+                        <mat-option *ngFor="let sexo of listaSexo" [value]="sexo">
+                            {{sexo.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formErrors.sexo">{{formErrors.sexo}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field appearance="legacy">
+                    <input matInput formControlName="fecNacimiento" [matDatepicker]="picker"
+                        placeholder="Fecha nacimiento">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="formErrors.fecNacimiento">{{formErrors.fecNacimiento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-raised-button color="accent" type="button" (click)="modUsuario()" [class.spinner]="modif"
+        [disabled]="modif">Guardar</button>
+    <button mat-raised-button [mat-dialog-close]="">Salir</button>
+</div>

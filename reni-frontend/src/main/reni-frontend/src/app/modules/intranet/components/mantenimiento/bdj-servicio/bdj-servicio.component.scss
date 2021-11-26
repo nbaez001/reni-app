@@ -1,0 +1,34 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        codigo: (
+            width: 4rem,
+        ),
+        nombre: (
+            width: 12rem,
+        ),
+        nomTipCentro: (
+            width: 9rem,
+        ),
+        nomEntidad: (
+            width: 18rem,
+        ),
+        nomLineaIntervencion: (
+            width: 8rem,
+        ),
+        flgActivo: (
+            width: 6rem,
+        ),
+        opt: (
+            width: 5rem,
+        ),
+    )
+);

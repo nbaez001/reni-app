@@ -1,0 +1,124 @@
+<mat-toolbar class="mat-accent mat-dialog-header">
+    <span>{{dataDialog.titulo}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="formularioGrp">
+            <ng-template matStepLabel>Carga</ng-template>
+            <form [formGroup]="formularioGrp" *ngIf="formErrors">
+                <mat-grid-list cols="12" rowHeight="56px">
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                        <button mat-stroked-button matTooltip="Descargar plantilla" type="button"
+                            (click)="descargarPlantilla()" [class.spinner]="descargar" [disabled]="descargar"
+                            style="color: green;border: none;">
+                            Descargar plantilla excel 
+                            <img class="btn-img-icon" src="./assets/images/icons/icono-excel.png">
+                            <!-- <mat-icon>cloud_download</mat-icon> -->
+                        </button>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                        <mat-form-field>
+                            <mat-label>Cargar archivo</mat-label>
+                            <input matInput type="text" formControlName="nombreArchivo" placeholder="Cargar archivo"
+                                readonly>
+                            <button mat-icon-button matTooltip="Buscar archivo" type="button" class="btn-icon-input"
+                                color="accent" (click)="openInput($event)">
+                                <mat-icon>attach_file</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formErrors.nombreArchivo">{{formErrors.nombreArchivo}}
+                            </mat-error>
+                            <input id="archivo" class="d-none" type="file"
+                                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                                (change)="cargarArchivo($event)" multiple="false">
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+                <div class="ta-center">
+                    <button mat-raised-button color="accent" (click)="validarArchivo()">Siguiente</button>
+                </div>
+            </form>
+        </mat-step>
+        <mat-step [completed]="paso2Completado">
+            <ng-template matStepLabel>Validacion</ng-template>
+            <h5 class="subtitulo" style="color: red; text-align: center;" *ngIf="!paso2Completado">
+                Se encontro errores en las filas: {{filasError}}</h5>
+            <h5 class="subtitulo" style="color: blue; text-align: center;" *ngIf="paso2Completado">
+                La lista cargada se encuentra sin errores, por favor proceda a cargarlo presionando el boton SIGUIENTE
+            </h5>
+
+            <div class="table-container table-overflow" style="margin-top: 10px;">
+                <table mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+                        <td mat-cell *matCellDef="let i = index"> {{paginator.pageSize * paginator.pageIndex + i + 1}}
+                        </td>
+                    </ng-container>
+                    <ng-container matColumnDef="servicios">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Servicios </th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-chip-list #listaServicios aria-label="Servicio">
+                                <mat-chip *ngFor="let servicio of row.listaServicio" [selectable]="true"
+                                    [removable]="false">
+                                    {{servicio.codServicio}}
+                                </mat-chip>
+                            </mat-chip-list>
+                        </td>
+                    </ng-container>
+                    <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+                        <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="opt" stickyEnd>
+                        <th mat-header-cell *matHeaderCellDef>Opc.</th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-icon-button matTooltip="Ver errores" (click)="verErrores(row)"
+                                *ngIf="row.error.length>0">
+                                <mat-icon [matBadge]="row.error.length" matBadgeColor="warn">report
+                                </mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+                <div class="empty" *ngIf="!isLoading && (dataSource === null || dataSource.data.length==0)">
+                    No existe datos para mostrar en la tabla
+                </div>
+
+                <div *ngIf="isLoading" class="spinerTable">
+                    <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
+
+                <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+            <div class="ta-center" style="margin-top: 5px;">
+                <button mat-button (click)="anterior()">Anterior</button>
+                <button mat-raised-button color="accent" [disabled]="!paso2Completado"
+                    (click)="registrarArchivo()">Siguiente</button>
+            </div>
+        </mat-step>
+        <mat-step>
+            <ng-template matStepLabel>Completado</ng-template>
+            <div class="image">
+                <p *ngIf="flagErrorMsg">Ha ocurrido un ERROR al cargar los datos: {{errorMsg}}</p>
+                <img *ngIf="flagErrorMsg" src="assets/images/icons/alerta/error.png" alt="Error">
+            </div>
+
+            <div class="image">
+                <p *ngIf="flagSuccessMsg">Se ha cargado correctamenta la lista de centros de atencion, presione
+                    Finalizar para continuar</p>
+                <img *ngIf="flagSuccessMsg" src="assets/images/icons/alerta/exito.png" alt="Exito">
+            </div>
+
+            <div class="ta-center">
+                <button mat-raised-button color="accent" (click)="finalizar()">Finalizar</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
+</div>

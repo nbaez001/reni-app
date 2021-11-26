@@ -1,0 +1,49 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        codUsuario: (
+            width: 10rem,
+        ),
+        codDisociacion: (
+            width: 10rem,
+        ),
+        tieneDocIdent: (
+            width: 5rem,
+        ),
+        tipDocumento: (
+            width: 5rem,
+        ),
+        nroDocumento: (
+            width: 5rem,
+        ),
+        nombre: (
+            width: 8rem,
+        ),
+        apePaterno: (
+            width: 8rem,
+        ),
+        apeMaterno: (
+            width: 8rem,
+        ),
+        sexo: (
+            width: 4rem,
+        ),
+        fecNacimiento: (
+            width: 6rem,
+        ),
+        flgActivo: (
+            width: 6rem,
+        ),
+        opt: (
+            width: 7.5rem,
+        ),
+    )
+);

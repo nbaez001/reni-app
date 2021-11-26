@@ -1,0 +1,130 @@
+<mat-toolbar class="mat-accent mat-dialog-header">
+    <span>{{dataDialog.titulo}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+        <h4>Datos usuario actual</h4>
+        <mat-grid-list cols="12" rowHeight="56px">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Tipo documento</mat-label>
+                    <input matInput formControlName="tipoDocumento" placeholder="Tipo documento" type="text"
+                        [Uppercased] readonly>
+                    <mat-error *ngIf="formErrors.tipoDocumento">{{formErrors.tipoDocumento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Nro documento</mat-label>
+                    <input matInput formControlName="nroDocumento" placeholder="Nro documento" type="text" [Uppercased]
+                        readonly>
+                    <mat-error *ngIf="formErrors.nroDocumento">{{formErrors.nroDocumento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" placeholder="Nombre" type="text" [Uppercased] readonly>
+                    <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Apellido paterno</mat-label>
+                    <input matInput formControlName="apePaterno" placeholder="Apellido paterno" type="text" [Uppercased]
+                        readonly>
+                    <mat-error *ngIf="formErrors.apePaterno">{{formErrors.apePaterno}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Apellido materno</mat-label>
+                    <input matInput formControlName="apeMaterno" placeholder="Apellido materno" type="text" [Uppercased]
+                        readonly>
+                    <mat-error *ngIf="formErrors.apeMaterno">{{formErrors.apeMaterno}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Sexo</mat-label>
+                    <input matInput formControlName="sexo" placeholder="Sexo" type="text" [Uppercased] readonly>
+                    <mat-error *ngIf="formErrors.sexo">{{formErrors.sexo}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+    <form [formGroup]="formularioUsuGrp">
+        <h4>Datos usuario asociado</h4>
+        <mat-grid-list cols="12" rowHeight="56px">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Tipo documento</mat-label>
+                    <mat-select formControlName="tipoDocumento">
+                        <mat-option *ngIf="!listaTipoDocumento" disabled>
+                            <div class="select-spinner">
+                                <span>Cargando...</span>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                        </mat-option>
+                        <mat-option *ngIf="listaTipoDocumento" value="">
+                            SELECCIONE
+                        </mat-option>
+                        <mat-option *ngFor="let tipoDocumento of listaTipoDocumento" [value]="tipoDocumento">
+                            {{tipoDocumento.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formUsuErrors.tipoDocumento">{{formUsuErrors.tipoDocumento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Nro documento</mat-label>
+                    <input matInput formControlName="nroDocumento" placeholder="Nro documento" type="text" [Uppercased]>
+                    <button mat-icon-button matTooltip="Buscar usuario" type="button" class="btn-icon-input"
+                        color="primary" (click)="buscarUsuario()" [class.spinner]="busca" [disabled]="busca">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error *ngIf="formUsuErrors.nroDocumento">{{formUsuErrors.nroDocumento}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" placeholder="Nombre" type="text" [Uppercased]>
+                    <mat-error *ngIf="formUsuErrors.nombre">{{formUsuErrors.nombre}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Apellido paterno</mat-label>
+                    <input matInput formControlName="apePaterno" placeholder="Apellido paterno" type="text"
+                        [Uppercased]>
+                    <mat-error *ngIf="formUsuErrors.apePaterno">{{formUsuErrors.apePaterno}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Apellido materno</mat-label>
+                    <input matInput formControlName="apeMaterno" placeholder="Apellido materno" type="text"
+                        [Uppercased]>
+                    <mat-error *ngIf="formUsuErrors.apeMaterno">{{formUsuErrors.apeMaterno}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 3}">
+                <mat-form-field>
+                    <mat-label>Sexo</mat-label>
+                    <input matInput formControlName="sexo" placeholder="Sexo" type="text" [Uppercased]>
+                    <mat-error *ngIf="formUsuErrors.sexo">{{formUsuErrors.sexo}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-raised-button color="accent" type="button" (click)="asocUsuario()" [class.spinner]="modif"
+        [disabled]="modif">Guardar</button>
+    <button mat-raised-button [mat-dialog-close]="">Salir</button>
+</div>

@@ -1,0 +1,156 @@
+.sidenav-container {
+  height: 100%;
+  mat-sidenav-content {
+    mat-toolbar {
+      .account {
+        mat-icon:first-child {
+          margin-right: -1px;
+        }
+      }
+    }
+  }
+}
+
+.sidenav {
+  width: 200px;
+  background-color: #eaeaec;
+}
+
+.sidenav {
+  mat-toolbar.logo {
+    align-items: center;
+    padding: 0px;
+    background-color: #7e0b0b;
+    a {
+      display: inline-block;
+      margin: 0 auto;
+      color: white;
+      text-decoration: none;
+      height: 70% !important;
+      width: 80%;
+      img {
+        height: 100% !important;
+        width: 100%;
+      }
+    }
+  }
+  .span-usuario {
+    span {
+      h4 {
+        margin-top: 6px;
+        margin-bottom: 7px;
+      }
+    }
+  }
+}
+
+.mat-list-item {
+  color: black;
+}
+
+.mat-list-item.mat-list-subitem {
+  padding-left: 20px !important;
+  width: calc(100% - 20px) !important;
+  padding-right: 0px !important;
+  div.mat-list-item-content {
+    padding-right: 2px !important;
+  }
+}
+
+.sidenav > .mat-nav-list > a:hover {
+  background-color: #f3f3f3;
+}
+
+.active-list-item {
+  background-color: #f3f3f3 !important;
+}
+
+.span-usuario {
+  width: auto;
+  height: auto;
+  color: black;
+  font-size: 15px;
+  text-align: center;
+  padding: auto;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.mat-toolbar {
+  height: 58px;
+}
+
+.mat-toolbar.mat-primary {
+  position: sticky;
+  top: 0;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.img-responsive {
+  width: auto;
+  height: 42px;
+}
+
+.mat-nav-list {
+  padding-top: 0px;
+}
+
+mat-icon {
+  margin-right: 5px;
+}
+
+.child-link {
+  background-color: #6f7f8e;
+  content: "";
+  height: 8px;
+  width: 8px;
+  z-index: 1;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.child-link {
+  background-color: #6f7f8e;
+  content: "";
+  height: 8px;
+  width: 8px;
+  z-index: 1;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.selected {
+  border-top: 1px solid #546371;
+  border-bottom: 1px solid #1f2f3f;
+}
+/* .selected div a{
+  border-right: 5px solid #1abb9c;
+} */
+
+mat-sidenav-content {
+  mat-toolbar {
+    background-color: #7e0b0b;
+    color: white;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .titulo-completo {
+    display: block;
+  }
+  .titulo-resumen {
+    display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .titulo-completo {
+    display: none;
+  }
+  .titulo-resumen {
+    display: block;
+  }
+}

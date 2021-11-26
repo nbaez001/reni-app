@@ -1,0 +1,50 @@
+<mat-toolbar class="mat-accent mat-dialog-header">
+    <span>{{dataDialog.titulo}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+        <mat-grid-list cols="12" rowHeight="56px">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 6, lg: 6, xl: 6}">
+                <mat-form-field>
+                    <mat-label>Nombre perfil</mat-label>
+                    <input matInput formControlName="nombre" placeholder="Nombre perfil" type="text" [Uppercased]
+                        cdkFocusInitial>
+                    <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+        <mat-accordion class="example-headers-align" *ngIf="listaFuncionalidad">
+            <mat-expansion-panel [expanded]="step === i" (opened)="setStep(i)" hideToggle
+                *ngFor="let obj of listaFuncionalidad; let i = index">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <mat-checkbox color="primary" 
+                            (change)="$event ? masterToggle(obj) : null"
+                            [checked]="hasValue(obj) && isAllSelected(obj)"
+                            [indeterminate]="hasValue(obj) && !isAllSelected(obj)"
+                            [disabled]="obj.referencia==MENU_HOME.REFERENCIA">
+                            Menu {{obj.titulo}}
+                        </mat-checkbox>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+
+                <mat-grid-list cols="12" rowHeight="56px" *ngFor="let fun of obj.listaFuncionalidad">
+                    <mat-grid-tile [ResponsiveRows]="{xs: 6, sm: 6, md: 6, lg: 6, xl: 6}">
+                        <mat-checkbox color="primary" (click)="$event.stopPropagation()"
+                            (change)="$event ? toggle(fun, obj) : null" [checked]="isSelected(fun)">
+                            {{fun.titulo}}
+                        </mat-checkbox>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </form>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-raised-button color="accent" type="button" (click)="regPerfil()" [class.spinner]="guardar"
+        [disabled]="guardar">Guardar</button>
+    <button mat-raised-button [mat-dialog-close]="">Salir</button>
+</div>

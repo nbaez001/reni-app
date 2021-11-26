@@ -1,0 +1,110 @@
+<navbar>
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header [collapsedHeight]="'48px'" [expandedHeight]="'48px'">
+            <mat-panel-title>
+                FILTROS REPORTE INDIVIDUAL
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <div class="mat-expansion-panel-cuerpo">
+            <form [formGroup]="formularioGrp">
+                <mat-grid-list cols="12" rowHeight="56px">
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                        <mat-form-field>
+                            <mat-label>Tipo documento</mat-label>
+                            <mat-select formControlName="tipoDocumento" (selectionChange)="actValidacionTipDocumento()">
+                                <mat-option *ngIf="!listaTipoDocumento" disabled>
+                                    <div class="select-spinner">
+                                        <span>Cargando...</span>
+                                        <mat-spinner diameter="20"></mat-spinner>
+                                    </div>
+                                </mat-option>
+                                <mat-option *ngIf="listaTipoDocumento" value="">
+                                    SELECCIONE
+                                </mat-option>
+                                <mat-option *ngFor="let tipoDocumento of listaTipoDocumento" [value]="tipoDocumento">
+                                    {{tipoDocumento.nombre}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-error *ngIf="formErrors.tipoDocumento">{{formErrors.tipoDocumento}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>Nro documento</mat-label>
+                            <input matInput formControlName="nroDocumento" placeholder="Nro documento" type="text"
+                                [Uppercased] (change)="actValidacionNroDocumento()">
+                            <mat-error *ngIf="formErrors.nroDocumento">{{formErrors.nroDocumento}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 3, xl: 3}">
+                        <mat-form-field appearance="legacy">
+                            <mat-label>{{flgReporteDisociado==0?'Código usuario':'Código disociación'}}</mat-label>
+                            <input matInput formControlName="codigoUsuario"
+                                placeholder="{{flgReporteDisociado==0?'Código usuario':'Código disociación'}}"
+                                type="text" [Uppercased] (change)="actValidacionCodUsuario()">
+                            <button mat-icon-button matTooltip="Buscar usuario" type="button" class="btn-icon-input"
+                                color="primary" (click)="buscarUsuario()" *ngIf="flgReporteDisociado==0?true:false">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formErrors.codigoUsuario">{{formErrors.codigoUsuario}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </form>
+            <div class="btnRigth">
+                <button mat-raised-button color="accent" (click)="buscar()" [disabled]="buscando">
+                    <mat-icon>search</mat-icon>
+                    <strong> BUSCAR</strong>
+                </button>
+                <button mat-raised-button (click)="limpiar()">
+                    <mat-icon svgIcon="broom"></mat-icon>
+                    <strong> LIMPIAR</strong>
+                </button>
+                <button mat-raised-button type="button" [class.spinner]="exportar" [disabled]="exportar"
+                    (click)="exportarExcel()" matTooltip="Exportar a excel">
+                    <mat-icon svgIcon="excel"></mat-icon>
+                    <strong>EXPORTAR</strong>
+                </button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title> RESULTADOS BUSQUEDA </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-container">
+            <div class="table-container">
+                <table mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+                        <td mat-cell *matCellDef="let i = index"> {{paginator.pageSize * paginator.pageIndex + i + 1}}
+                        </td>
+                    </ng-container>
+                    <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header [title]="column.headerDescrip">
+                            {{ column.header }}
+                        </th>
+                        <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <div class="empty" *ngIf="!isLoading && (dataSource === null || dataSource.data.length==0)">
+                    No existe datos para mostrar en la tabla
+                </div>
+
+                <div *ngIf="isLoading" class="spinerTable">
+                    <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
+
+                <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+                </mat-paginator>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+</navbar>

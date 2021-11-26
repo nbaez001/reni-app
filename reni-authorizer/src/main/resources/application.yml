@@ -1,0 +1,47 @@
+spring:
+  profiles:
+    active: '@spring.profiles.active@'
+config:
+  oauth2:
+    privateKey: -----BEGIN RSA PRIVATE KEY-----MIIEpQIBAAKCAQEA74dddBgzojGAODlMGx0mWXIpusTHcY5n3Y7xrPAVdgNsl9CTiZTpxtPHXmOtV+5Kx58q7P+2PsrFZUoGAr4aFzeGIdnE1A2ZtZTknvY4VEvFkWOQyQfm3nIPCQtv6EZv6AFinQyicr7jjapbgb4JjldN+cABbb3eh6lvJP/twwAlrCiuVKfw36Ms9SP3j6duAoI7AaDFY247UYh7ngoGJFV6xkaRzgiBW9OlUpwETCFiZwYtGvPNngHTEWjV2IL1QyZdv+aKbloi+HsvLYRNrhzRaG/3A19NXBntGtdKLqH5PClj7g1YyTaQVyujVREU8zWzXcmmnzJ29RshDRrsXQIDAQABAoIBAQDZU1JhcUv3zz3sxV/eAfa3lTNzd/MVfwWSKo3wQOzX5Id0vxP98pShh6kOZRX0AArtT+ccnW53TncHTcBiYKU/h2s172X8mFJsRCmiaPf208DwBwxoubio/4fQxwXEE5SZRhh5Met6fOPttzHLZ+c3tNLU1Xb2YR00rXBge6z4DLrD+i0CiZgH8kv4nVx40T/fXbkLRJH8+Mu9JPApSGUIcZSCtByyZX9xZTF/QnO4pCR/8z6s/MwQbPU3azPTlMO0h/p5qe2cb9JS+hZl8BwUzue9ooQiFKWSS3EItg+1REnlPPPtEB2NYMbzgA1yNeTEr2ZTHJwXWhY0sjqoe8vpAoGBAPlvjI/E5XfHiHOCbNOCqw9klmDIngO610F52fiPFvEZiWpc5g68RPjtGyK3UtEhDhpC2NmCo4sXginmzNSqrezv4Kndg7WYIUKrRi52c8J8Nfc4t5+zpY3HXYgqR3Fkobdp616nnmx8uBP0xDcz9GpVLluh+5uPsMI4PfqWsK0PAoGBAPXVEpifHBJl8TjR5jFYOdZYA5k535yIKLk4fLHAnfcz+oxeJWuhGka2h6ijLGS1Z3zsbMZhj7TXn29sKxJuYgHjO7f+OxaYDEL9/zTyT8MiN7zDCWbVawhEYvfVuguYGlnE6wkqwkMGv037IinpxCnCECWeOT90tKFyX0i88SfTAoGBAJg60QFJPHZuq0M7vSkU3UtGq1Qj+/PwysBmGnZM9cZtPGVSjwE9O6bkJiR4161UTCQQ2gFdbmxMC5+BAU9lX0J0X5ur2l8wmlPy7aEbn6h5YAIidkacQBSYMOgSTYnRzbR/iys4h0JUl49uWXYLWkau99zqrgERn+HYq1LNNsRXAoGATVbNVOqpoDgmHaQbcWa6O27RIwGMEejcNvlIcXuRttXJeyObTjMO2zRNlYZQTxarCigvSHIlDdXQOPOk0VWcy887WHVJDaCkKudRxMx+v3siYeZSLOHznFQ3dpTsxP0DPT6wWt/y4bdbtCLP6rO6nRCKl+shQ49pzGj5BR88FzUCgYEAuLxUxaVNBjy02C3z/F3nLvjJYWE4w5jZJNnNP2X0UdfPWvRz1K2NvU+0Ij6NTtnWtrjfTo3+Ah4HmrUnO1ixjrOxZ+98shcJPd4437jx6LujvxssKfkUDk0rfHl9ra2uBEhHBlWMELw8u9moNjly9BZUneqFWxVlhi7MwWgP5lM=-----END RSA PRIVATE KEY-----
+    publicKey: -----BEGIN PUBLIC KEY-----MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA74dddBgzojGAODlMGx0mWXIpusTHcY5n3Y7xrPAVdgNsl9CTiZTpxtPHXmOtV+5Kx58q7P+2PsrFZUoGAr4aFzeGIdnE1A2ZtZTknvY4VEvFkWOQyQfm3nIPCQtv6EZv6AFinQyicr7jjapbgb4JjldN+cABbb3eh6lvJP/twwAlrCiuVKfw36Ms9SP3j6duAoI7AaDFY247UYh7ngoGJFV6xkaRzgiBW9OlUpwETCFiZwYtGvPNngHTEWjV2IL1QyZdv+aKbloi+HsvLYRNrhzRaG/3A19NXBntGtdKLqH5PClj7g1YyTaQVyujVREU8zWzXcmmnzJ29RshDRrsXQIDAQAB-----END PUBLIC KEY-----
+    clientId: pseg
+    clientSecret: pseg@2020
+    expiration: 3600
+---
+server:
+  port: 8082
+  servlet:
+    context-path: /reni-authorizer
+spring:
+  profiles: dev   
+  application:
+    name: reni-authorizer
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: "jdbc:oracle:thin:@127.0.0.1:1521:ORCL"
+    username: "SEGURIDAD"
+    password: "1234"
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 60000
+constantes:
+  id-modulo-reni: 181
+---
+spring:
+  profiles: qa   
+  application:
+    name: reni-authorizer
+  datasource:
+    jndi-name: jdbc/ReniSeguridadDS
+constantes:
+  id-modulo-reni: 181
+---
+spring:
+  profiles: prd   
+  application:
+    name: reni-authorizer
+  datasource:
+    jndi-name: jdbc/ReniSeguridadDS
+constantes:
+  id-modulo-reni: 25

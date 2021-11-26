@@ -1,0 +1,55 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        codigo: (
+            width: 6rem,
+        ),
+        nombre: (
+            width: 15rem,
+        ),
+        nomTipoCentro: (
+            width: 10rem,
+        ),
+        nomSubtipoCentro: (
+            width: 10rem,
+        ),
+        fechaCreacion: (
+            width: 6rem,
+        ),
+        ubigeo: (
+            width: 4rem,
+        ),
+        nomDepartamento: (
+            width: 8rem,
+        ),
+        nomProvincia: (
+            width: 8rem,
+        ),
+        nomDistrito: (
+            width: 8rem,
+        ),
+        areaResid: (
+            width: 8rem,
+        ),
+        direccion: (
+            width: 12rem,
+        ),
+        nroTelefono: (
+            width: 7rem,
+        ),
+        flgActivo: (
+            width: 6rem,
+        ),
+        opt: (
+            width: 7.5rem,
+        ),
+    )
+);

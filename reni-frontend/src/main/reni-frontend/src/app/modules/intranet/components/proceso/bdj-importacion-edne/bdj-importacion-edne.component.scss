@@ -1,0 +1,40 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        nomArchivo: (
+            width: 10rem,
+        ),
+        nomEstructura: (
+            width: 15rem,
+        ),
+        fecImportacion: (
+            width: 8rem,
+        ),
+        fecPeriodo: (
+            width: 5rem,
+        ),
+        nomServicio: (
+            width: 15rem,
+        ),
+        nomEntidad: (
+            width: 15rem,
+        ),
+        nomLineaInter: (
+            width: 15rem,
+        ),
+        flgActivo: (
+            width: 6rem,
+        ),
+        opt: (
+            width: 5rem,
+        ),
+    )
+);

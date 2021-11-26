@@ -1,0 +1,37 @@
+@import "../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        usuario: (
+            width: 6rem,
+        ),
+        nomPerfil: (
+            width: 6rem,
+        ),
+        nombre: (
+            width: 18rem,
+        ),
+        nroDocumento: (
+            width: 6rem,
+        ),
+        nomArea: (
+            width: 9rem,
+        ),
+        nomCargo: (
+            width: 9rem,
+        ),
+        flgActivo: (
+            width: 6rem,
+        ),
+        opt: (
+            width: 5rem,
+        ),
+    )
+);

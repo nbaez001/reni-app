@@ -1,0 +1,29 @@
+@import "../../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        nombre: (
+            width: 15rem,
+        ),
+        nomEntidad: (
+            width: 15rem,
+        ),
+        nomLineaIntervencion: (
+            width: 15rem,
+        ),
+        nomServicio: (
+            width: 15rem,
+        ),
+    )
+);
+
+.mat-row:hover {
+    cursor: pointer;
+}

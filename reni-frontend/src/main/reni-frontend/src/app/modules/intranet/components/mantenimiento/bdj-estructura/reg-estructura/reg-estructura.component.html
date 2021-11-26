@@ -1,0 +1,198 @@
+<mat-toolbar class="mat-accent mat-dialog-header">
+    <span>{{dataDialog.titulo}}</span>
+    <button tabindex="-1" mat-icon-button [mat-dialog-close]="null">
+        <mat-icon>close</mat-icon>
+    </button>
+</mat-toolbar>
+<div mat-dialog-content>
+    <form [formGroup]="formularioGrp">
+        <mat-grid-list cols="12" rowHeight="56px">
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                <mat-form-field>
+                    <mat-label>Nombre estructura</mat-label>
+                    <input matInput formControlName="nombre" placeholder="Nombre estructura" type="text" [Uppercased]>
+                    <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                <mat-form-field>
+                    <mat-label>Descripción estructura</mat-label>
+                    <input matInput formControlName="descripcion" placeholder="Descripción estructura" type="text" [Uppercased]>
+                    <mat-error *ngIf="formErrors.descripcion">{{formErrors.descripcion}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                <mat-form-field>
+                    <mat-label>Tipo usuario</mat-label>
+                    <mat-select formControlName="tipoUsuario">
+                        <mat-option *ngIf="!listaTipoUsuario" disabled>
+                            <div class="select-spinner">
+                                <span>Cargando...</span>
+                                <mat-spinner diameter="20"></mat-spinner>
+                            </div>
+                        </mat-option>
+                        <mat-option *ngIf="listaTipoUsuario" value="">
+                            SELECCIONE
+                        </mat-option>
+                        <mat-option *ngFor="let tipoUsuario of listaTipoUsuario" [value]="tipoUsuario">
+                            {{tipoUsuario.nombre}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="formErrors.tipoUsuario">{{formErrors.tipoUsuario}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                <mat-form-field>
+                    <mat-label>Servicio</mat-label>
+                    <input matInput formControlName="servicio" placeholder="Servicio" type="text" readonly [Uppercased]>
+                    <button mat-icon-button matTooltip="Buscar servicios" type="button" class="btn-icon-input"
+                        color="primary" (click)="buscarServicios()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error *ngIf="formErrors.servicio">{{formErrors.servicio}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 6, md: 4, lg: 4, xl: 4}">
+                <mat-form-field>
+                    <mat-label>¿Replicar estructura anterior?</mat-label>
+                    <input matInput formControlName="estructuraRepl" placeholder="¿Replicar estructura anterior?"
+                        type="text" readonly [Uppercased]>
+                    <button mat-icon-button matTooltip="Buscar estructuras" type="button" class="btn-icon-input"
+                        color="primary" (click)="buscarEstructuras()">
+                        <mat-icon>search</mat-icon>
+                    </button>
+                    <mat-error *ngIf="formErrors.estructuraRepl">{{formErrors.estructuraRepl}}</mat-error>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title> MAPEO DE CAMPOS ESTRUCTURA RENE </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="card-container">
+            <form [formGroup]="formularioDetGrp" (keyup.enter)="agregarParametro()">
+                <mat-grid-list cols="12" rowHeight="56px">
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+                        <mat-form-field>
+                            <mat-label>Nombre campo excel</mat-label>
+                            <input #nomCampoExcel matInput formControlName="nomCampoExcel"
+                                placeholder="Nombre campo excel" type="text" [Uppercased]>
+                            <mat-error *ngIf="formDetErrors.nomCampoExcel">{{formDetErrors.nomCampoExcel}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+                        <mat-form-field>
+                            <mat-label>Orden campo excel</mat-label>
+                            <input matInput formControlName="ordenCampoExcel" placeholder="Orden campo excel"
+                                type="number">
+                            <mat-error *ngIf="formDetErrors.ordenCampoExcel">{{formDetErrors.ordenCampoExcel}}
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+                        <mat-form-field>
+                            <mat-label>Nombre tabla BD</mat-label>
+                            <input matInput formControlName="nomTablaBd" placeholder="Nombre tabla BD" type="text"
+                                readonly [Uppercased]>
+                            <button mat-icon-button matTooltip="Buscar tablas de Base de Datos" type="button"
+                                class="btn-icon-input" color="primary" (click)="buscarTablasBD()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formDetErrors.nomTablaBd">{{formDetErrors.nomTablaBd}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+                        <mat-form-field>
+                            <mat-label>Nombre campo tabla BD</mat-label>
+                            <input matInput formControlName="nomCampoBd" placeholder="Nombre campo tabla BD" type="text"
+                                readonly [Uppercased]>
+                            <button mat-icon-button matTooltip="Buscar campos de las tablas de la Base de Datos"
+                                type="button" class="btn-icon-input" color="primary" (click)="buscarCamposBD()">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formDetErrors.nomCampoBd">{{formDetErrors.nomCampoBd}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+                        <mat-checkbox formControlName="campoEsFk" color="primary" (change)="verActivacionIdMaestra()">
+                            ¿Es llave foranea de tabla maestra?
+                        </mat-checkbox>
+                        <mat-error *ngIf="formDetErrors.campoEsFk">{{formDetErrors.campoEsFk}}</mat-error>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+                        <mat-form-field>
+                            <mat-label>Id de tabla maestra</mat-label>
+                            <input matInput formControlName="campoIdmaestra" placeholder="Id de tabla maestra"
+                                type="text" readonly [Uppercased]>
+                            <button mat-icon-button matTooltip="Buscar tablas maestras" type="button"
+                                class="btn-icon-input" color="primary" (click)="buscarTablasMaestra()"
+                                [disabled]="!formularioDetGrp.get('campoEsFk').value">
+                                <mat-icon>search</mat-icon>
+                            </button>
+                            <mat-error *ngIf="formDetErrors.campoIdmaestra">{{formDetErrors.campoIdmaestra}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+                        <mat-form-field>
+                            <mat-label>Descripcion del campo</mat-label>
+                            <input matInput formControlName="descripcion" placeholder="Descripcion del campo"
+                                type="text" [Uppercased]>
+                            <mat-error *ngIf="formDetErrors.descripcion">{{formDetErrors.descripcion}}</mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile [ResponsiveRows]="{xs: 12, sm: 3, md: 3, lg: 3, xl: 3}">
+                        <button mat-raised-button color="accent" type="button" (click)="agregarParametro()"
+                            [class.spinner]="agregar" [disabled]="agregar">Agregar</button>
+                        <button mat-raised-button color="accent" type="button" (click)="cargarMasivaParametro()">
+                            Cargar masiva
+                        </button>
+                    </mat-grid-tile>
+                </mat-grid-list>
+            </form>
+
+            <div class="table-container">
+                <table mat-table [dataSource]="dataSource" matSort>
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> N° </th>
+                        <td mat-cell *matCellDef="let i = index"> {{paginator.pageSize * paginator.pageIndex + i + 1}}
+                        </td>
+                    </ng-container>
+                    <ng-container *ngFor="let column of columnsGrilla" [matColumnDef]="column.columnDef">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ column.header }} </th>
+                        <td mat-cell *matCellDef="let row"> {{ column.cell(row) }} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="opt" stickyEnd>
+                        <th mat-header-cell *matHeaderCellDef>Opc.</th>
+                        <td mat-cell *matCellDef="let row">
+                            <button mat-icon-button matTooltip="Eliminar parametro" (click)="elimParametro(row)">
+                                <mat-icon>delete_outline</mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+
+                <div class="empty" *ngIf="!isLoading && (dataSource === null || dataSource.data.length==0)">
+                    No existe datos para mostrar en la tabla
+                </div>
+
+                <div *ngIf="isLoading" class="spinerTable">
+                    <mat-progress-spinner [diameter]="35" color="primary" mode="indeterminate">
+                    </mat-progress-spinner>
+                </div>
+
+                <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
+                </mat-paginator>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div mat-dialog-actions align="center">
+    <button mat-raised-button color="accent" type="button" (click)="regEstructura()" [class.spinner]="guardar"
+        [disabled]="guardar">Guardar</button>
+    <button mat-button type="button" [mat-dialog-close]="">Salir</button>
+</div>

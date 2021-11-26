@@ -1,0 +1,17 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>pe.gob.mimp.reni</groupId>
+	<artifactId>reni-app</artifactId>
+	<version>TRUNK</version>
+	<packaging>pom</packaging>
+	<name>reni-app</name>
+	<description>Aplicacion Repositorio Nominal de Niñas, Niños y Adolescentes en Situacion de Riesgo o Desproteccion</description>
+	<modules>
+		<module>reni-backend</module>
+		<module>reni-frontend</module>
+		<module>reni</module>
+		<module>reni-authorizer</module>
+	</modules>
+</project>

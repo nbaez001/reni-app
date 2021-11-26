@@ -1,0 +1,49 @@
+@import "../../../../../../../assets/styles/scss/views/table";
+
+.table-container {
+    max-height: 400px;
+}
+
+@include mat-table-columns(
+    (
+        id: (
+            width: 2rem,
+        ),
+        nomCampoExcel: (
+            width: 8rem,
+        ),
+        ordenCampoExcel: (
+            width: 4rem,
+        ),
+        nomTablaBd: (
+            width: 15rem,
+        ),
+        nomCampoBd: (
+            width: 15rem,
+        ),
+        campoEsFk: (
+            width: 4rem,
+        ),
+        campoIdmaestra: (
+            width: 10rem,
+        ),
+        descripcion: (
+            width: 20rem,
+        ),
+        opt: (
+            width: 2.5rem,
+        ),
+    )
+);
+
+::ng-deep.mat-checkbox-layout {
+    white-space: normal !important;
+}
+
+::ng-deep.mat-checkbox-inner-container {
+    margin-top: 4px;
+}
+
+::ng-deep.mat-checkbox-inner-container {
+    margin-top: 15px !important;
+}
